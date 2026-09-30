@@ -1,0 +1,65 @@
+{
+	"name": "pi-ui-extensions",
+	"version": "0.1.0",
+	"license": "MIT",
+	"description": "Enhanced UI extensions for Pi coding agent - forked and customized from pi-cc-extensions",
+	"type": "module",
+	"keywords": [
+		"pi-package",
+		"pi-extension",
+		"pi-coding-agent",
+		"ui",
+		"tui"
+	],
+	"homepage": "https://github.com/hollinlee/pi-ui-extensions#readme",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/hollinlee/pi-ui-extensions.git"
+	},
+	"bugs": {
+		"url": "https://github.com/hollinlee/pi-ui-extensions/issues"
+	},
+	"author": "hollinlee",
+	"files": [
+		"extensions",
+		"themes",
+		"README.md"
+	],
+	"pi": {
+		"extensions": [
+			"./extensions/index.ts"
+		],
+		"themes": [
+			"./themes/cc-dark.json",
+			"./themes/cc-light.json"
+		]
+	},
+	"scripts": {
+		"test": "node --test tests/**/*.test.ts",
+		"typecheck": "tsc --noEmit",
+		"format": "biome format --write .",
+		"format:check": "biome format .",
+		"lint": "biome check ."
+	},
+	"dependencies": {
+		"@shikijs/cli": "^4.0.2",
+		"grok-mermaid": "^0.2.2",
+		"jiti": "^2.7.0"
+	},
+	"peerDependencies": {
+		"@earendil-works/pi-ai": "*",
+		"@earendil-works/pi-coding-agent": "*",
+		"@earendil-works/pi-tui": "*"
+	},
+	"engines": {
+		"node": ">=22.19.0"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.5.5",
+		"@earendil-works/pi-ai": "0.99.1",
+		"@earendil-works/pi-coding-agent": "0.99.1",
+		"@earendil-works/pi-tui": "0.99.1",
+		"@types/node": "^26.1.1",
+		"typescript": "^5.9.3"
+	}
+}
