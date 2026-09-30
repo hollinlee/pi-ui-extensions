@@ -53,10 +53,11 @@ test("reserves prompt columns and does not mutate cached ANSI/OSC lines", () => 
 			for (const width of [117, 141]) {
 				const lines = UserMessageComponent.prototype.render.call({}, width);
 				assert.equal(passedWidth, width - 3);
-				assert.deepEqual(lines.map(visibleWidth), [width, width]);
-				assert.ok(lines[0].startsWith(" ❯ "));
+				assert.deepEqual(lines.map(visibleWidth), [width, width, width]);
+				assert.ok(lines[0].includes("─"));
+				assert.ok(lines[1].startsWith(" ❯ "));
 				assert.ok(cache[0].startsWith("\x1b]133;A\x07"));
-				assert.ok(lines[0].includes("\x1b]133;A\x07"));
+				assert.ok(!lines[0].includes("\x1b]133;A\x07"));
 			}
 			const patched = UserMessageComponent.prototype.render;
 			start();
@@ -96,9 +97,14 @@ test("real user messages preserve content across resize and repeated renders", (
 					`width=${width}`,
 				);
 				const normalized = lines
+					.slice(1, -1)
 					.map(stripVTControlCharacters)
 					.join("")
 					.replace(/\s|❯/g, "");
+				assert.ok(lines[0].includes("─"));
+				assert.ok(lines.at(-1)?.includes("─"));
+				assert.ok(lines.slice(1, -1).every((line, index) => index === 0 ? line.includes(" ❯ ") : !line.includes("❯")));
+				assert.ok(lines.slice(1, -1).every((line) => !line.includes("\x1b[48;")));
 				assert.equal(normalized, text.replace(/\s/g, ""));
 				assert.deepEqual(component.render(width), lines);
 			}

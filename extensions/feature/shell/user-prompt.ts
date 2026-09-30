@@ -6,7 +6,6 @@
 
 import {
   CustomEditor,
-  type EditorTheme,
   type ExtensionAPI,
   type ExtensionContext,
   type KeybindingsManager,
@@ -14,6 +13,7 @@ import {
 import {
   truncateToWidth,
   visibleWidth,
+  type EditorTheme,
   type TUI,
 } from "@earendil-works/pi-tui";
 
