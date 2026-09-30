@@ -7,6 +7,7 @@ import { installFlushDockedBash } from "./feature/shell/flush-docked-bash.ts";
 import customFooter from "./feature/shell/footer.ts";
 import piStartupHeader, { installEarlyStartupHeader } from "./feature/shell/startup-header.ts";
 import { registerPromptEditor } from "./feature/shell/user-prompt.ts";
+import { registerUserMessageRenderer } from "./feature/shell/user-message-renderer.ts";
 import workingMessage from "./feature/shell/working-message.ts";
 
 // feature
@@ -29,6 +30,7 @@ export default function (pi: ExtensionAPI): void {
 	if (config.enableWorkingMessage) workingMessage(pi);
 	customFooter(pi);
 	registerPromptEditor(pi);
+	registerUserMessageRenderer(pi);
 
 	// render stack：thinking controller 直接交给 style 作 query
 	markdownEnhance(pi);
